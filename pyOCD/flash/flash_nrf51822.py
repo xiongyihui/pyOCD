@@ -1,0 +1,56 @@
+"""
+ mbed CMSIS-DAP debugger
+ Copyright (c) 2006-2013 ARM Limited
+
+ Licensed under the Apache License, Version 2.0 (the "License");
+ you may not use this file except in compliance with the License.
+ You may obtain a copy of the License at
+
+     http://www.apache.org/licenses/LICENSE-2.0
+
+ Unless required by applicable law or agreed to in writing, software
+ distributed under the License is distributed on an "AS IS" BASIS,
+ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ See the License for the specific language governing permissions and
+ limitations under the License.
+"""
+
+from flash import Flash
+
+flash_algo = { 'load_address' : 0x20000000,
+               'instructions' : [
+    0xE00ABE00, 0x062D780D, 0x24084068, 0xD3000040, 0x1E644058, 0x1C49D1FA, 0x2A001E52, 0x4770D1F2,
+    0x4770ba40, 0x4770bac0, 0x48884987, 0xd0052a01L, 0xd0092a02L, 0xd00d2a03L, 0x47702001, 0x604a2202, 
+    0x29006801, 0xe00ad0fcL, 0x604a2201, 0x29006801, 0xe004d0fcL, 0x604a2200, 0x29006801, 0x2000d0fc, 
+    0x49794770, 0x60482000, 0x68014878, 0xd0fc2900L, 0x47702000, 0x4876b570, 0x4096841, 0xd00c0e09L, 
+    0x6ae10404, 0xb2ca2501L, 0x49704b6f, 0xd0062a00L, 0x1c526802, 0x6800d021, 0x2001e019, 0x6aa0bd70, 
+    0x6098e005, 0x2a00680a, 0x6922d0fc, 0x69221810, 0x43726966, 0xd8f44282L, 0x6808615d, 0xd0fc2800L, 
+    0x6098e00f, 0x2a00680a, 0x6922d0fc, 0x69221810, 0x436a6965, 0xd8f44282L, 0x60dde003, 0x28006808, 
+    0x2000d0fc, 0x581bd70, 0x2101d120, 0x690a0709, 0x435a694b, 0xd9174282L, 0x6126aca, 0xd1020e12L, 
+    0x42816a89, 0x4952d810, 0x1c52680a, 0x680ad002, 0xd8094282L, 0x4096849, 0xd0070e09L, 0x6088494a, 
+    0x6801484a, 0xd0fc2900L, 0x47702000, 0x47702001, 0x783b570, 0x78bd122, 0x2301d120, 0x691c071b, 
+    0x436c695d, 0xd9194284L, 0x6246adc, 0xd1020e24L, 0x42846a9c, 0x4b3ed812, 0x1c64681c, 0x681dd002, 
+    0xd80b4285L, 0x41b685b, 0xd0070e1bL, 0x4c372300, 0xe00b088dL, 0x58460099, 0xd0011c76L, 0xbd702001L, 
+    0x50465856, 0x29006821, 0x1c5bd0fc, 0xd8f1429dL, 0xbd702000L, 0x783b570, 0x78bd125, 0x2501d123, 
+    0x692b072d, 0x4363696c, 0xd91c4283L, 0x61b6aeb, 0xd1020e1bL, 0x42846aac, 0x4b25d815, 0x624685c, 
+    0xd1020e24L, 0x4284681c, 0x685bd80d, 0xe1b041b, 0x2300d009, 0xe008088eL, 0x5905009c, 0x42a55914, 
+    0x99d002, 0xbd701808L, 0x429e1c5b, 0x1840d8f4, 0xb530bd70L, 0xd1200783L, 0xd11e078bL, 0x71b2301, 
+    0x695d691c, 0x4284436c, 0x6adcd91c, 0xe240624, 0x6a9cd102, 0xd8154284L, 0x685c4b0d, 0xe240624, 
+    0x681dd102, 0xd80d4285L, 0x41b685b, 0xd0090e1bL, 0xe0052300L, 0x42945cc4, 0x2001d001, 0x1c5bbd30, 
+    0xd3f7428bL, 0xbd302000L, 0x4001e500, 0x4001e400, 0x10001000, 0x0, 
+                                ],
+               'pc_init' : 0x20000029,
+               'pc_eraseAll' : 0x20000075,
+               'pc_erase_sector' : 0x200000E7,
+               'pc_program_page' : 0x20000131,
+               'begin_stack' : 0x20001000,
+               'begin_data' : 0x20002000,
+               'static_base' : 0x20000234,
+               'page_size' : 1024
+              };
+
+class Flash_nrf51822(Flash):
+    
+    def __init__(self, target):
+        super(Flash_nrf51822, self).__init__(target, flash_algo)
+    
