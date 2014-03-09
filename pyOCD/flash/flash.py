@@ -72,6 +72,21 @@ class Flash(object):
             pass
         
         return
+        
+    def eraseSector(self, flashPtr):
+        """
+        Erase sector
+        """
+        
+        # update core register to execute the eraseAll subroutine
+        self.updateCoreRegister(flashPtr, 0, 0, 0, self.flash_algo['pc_erase_sector'])
+        
+        # resume and wait until the breakpoint is hit
+        self.target.resume()
+        while(self.target.getState() == TARGET_RUNNING):
+            pass
+        
+        return
     
     def programPage(self, flashPtr, bytes):
         """
