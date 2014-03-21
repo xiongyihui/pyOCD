@@ -558,6 +558,7 @@ class CortexM(Target):
         reset a core. After a call to this function, the core
         is running
         """
+        self.writeMemory(NVIC_AIRCR, NVIC_AIRCR_VECTKEY | NVIC_AIRCR_SYSRESETREQ)
         self.transport.reset()
         
     def resetStopOnReset(self):

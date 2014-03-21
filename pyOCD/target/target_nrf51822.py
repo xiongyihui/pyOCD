@@ -24,8 +24,8 @@ class NRF51822(CortexM):
     memoryMapXML =  """<?xml version="1.0"?>
 <!DOCTYPE memory-map PUBLIC "+//IDN gnu.org//DTD GDB Memory Map V1.0//EN" "http://sourceware.org/gdb/gdb-memory-map.dtd">
 <memory-map>
-    <memory type="flash" start="0x08000000" length="0x40000"> <property name="blocksize">0x400</property></memory>
-    <memory type="ram" start="0x20000000" length="0x20000"> </memory>
+    <memory type="flash" start="0x00000000" length="0x40000"> <property name="blocksize">0x400</property></memory>
+    <memory type="ram" start="0x20000000" length="0x4000"> </memory>
 </memory-map>
 """
     

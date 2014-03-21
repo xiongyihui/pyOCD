@@ -57,6 +57,28 @@ class Flash(object):
             pass
         
         return
+
+    def initEx(self, fnc):
+        """
+        Download the flash algorithm in RAM
+        """
+        
+        logging.debug("initEx")
+        self.target.halt()
+        self.target.setTargetState("PROGRAM")
+        
+        # download flash algo in RAM
+        self.target.writeBlockMemoryAligned32(self.flash_algo['load_address'], self.flash_algo['instructions'])
+        
+        # update core register to execute the init subroutine
+        self.updateCoreRegister(0, 0, fnc, 0, self.flash_algo['pc_init'])
+        
+        # resume and wait until the breakpoint is hit
+        self.target.resume()
+        while(self.target.getState() == TARGET_RUNNING):
+            pass
+        
+        return
     
     def eraseAll(self):
         """
