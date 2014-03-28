@@ -45,7 +45,7 @@ def flashBinary(flash, path_file):
     bin = open(os.path.join(parentdir, 'res', 'good_bin.txt'), "w+")
     """
     
-    flashPtr = 0
+    flashPtr = 0x08000000
     nb_bytes = 0
     lastSecNum = -1
     try:
